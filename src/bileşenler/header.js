@@ -1,3 +1,5 @@
+import { queryByDisplayValue } from "@testing-library/dom";
+
 const Header = (baslik, tarih, yazi) => {
   // GÖREV 1
   // ---------------------
@@ -11,7 +13,25 @@ const Header = (baslik, tarih, yazi) => {
   //    <span class="temp">{ yazi }</span>
   //  </div>
   //
-}
+  const header = document.createElement("div");
+  header.className = "header";
+
+  const date = document.createElement("span");
+  date.className = "date";
+  date.textContent = tarih;
+  header.append(date);
+
+  const h1 = document.createElement("h1");
+  h1.textContent = baslik;
+  header.append(h1);
+
+  const temp = document.createElement("span");
+  temp.className = "temp";
+  temp.textContent = yazi;
+  header.append(temp);
+
+  return header;
+};
 
 const headerEkleyici = (secici) => {
   // GÖREV 2
@@ -20,10 +40,12 @@ const headerEkleyici = (secici) => {
   // Görev 1'de tanımladığınız Header bileşenini kullanarak bir header oluşturun (baslik,tarih,yazi parametrelerini kendi isteğinize göre belirleyin)
   // Oluşturulan header'i, verilen seçiciyle eşleşen DOM'daki öğeye eklemelidir.
   //
-
-  // İPUCU: querySelector bir string alabilir (bknz: querySelector("#wrapper")) 
+  // İPUCU: querySelector bir string alabilir (bknz: querySelector("#wrapper"))
   // fakat aynı zamanda bir değişken de alabilir (bknz: querySelector(secici))
- 
-}
 
-export { Header, headerEkleyici }
+  const haber = Header("bitanebaslik", 12122026, "burdadahaberolsun");
+
+  document.querySelector(secici).append(haber);
+};
+
+export { Header, headerEkleyici };
